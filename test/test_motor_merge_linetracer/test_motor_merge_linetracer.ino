@@ -14,9 +14,9 @@ void setup() {
   Serial.begin(9600);
 
   // motor_Dirver
-  motor1.setSpeed(200);
+  motor1.setSpeed(150);
   motor1.run(RELEASE);
-  motor2.setSpeed(200);
+  motor2.setSpeed(150);
   motor2.run(RELEASE);
 
   // lineTracer
@@ -47,27 +47,31 @@ void loop() {
   Serial.println(val_R);
   
   if (val_R == LOW && val_L == LOW){ // 둘다 검은색X
+    Speed(1,150);
+    Speed(2,150);
     motor1.run(FORWARD);
     motor2.run(FORWARD);
     //delay(500);
   }
   
   else if (val_R == LOW){     // 왼쪽이 검은색
-    Speed(1,170);
+    Speed(1,130);
     motor1.run(BACKWARD);
     motor2.run(FORWARD);          
    //delay(500);
   }
   else if (val_L == LOW){ // 오른쪽이 검은색
     motor1.run(FORWARD);
-    Speed(2,170);
+    Speed(2,130);
     motor2.run(BACKWARD);
     //delay(500);
   } 
   else{               // 둘다 검은색
+    Speed(1,150);
+    Speed(2,150);
     motor1.run(BACKWARD);
     motor2.run(BACKWARD);
-    delay(200);
+    delay(1000);
   }
 #endif
   
