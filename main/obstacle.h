@@ -10,6 +10,7 @@ void startSound();
 void stopSound();
 void arriveSound();
 int checkOpstacle();
+void startObstacleCheck();
 
 void useBuzzerPin(){
     pinMode(Buzzer_Pin, OUTPUT);
@@ -17,6 +18,12 @@ void useBuzzerPin(){
 
 void useIRSensor(){
     pinMode(IR_Sensor_Pin, INPUT);
+}
+
+void startObstacleCheck(){
+  if (checkOpstacle() == 1){
+    stopSound();
+  }
 }
 
 int checkOpstacle(){
@@ -38,12 +45,10 @@ void arriveSound(){
 }
 
 void stopSound(){
-    for(int i = 0; i<3; i++){
-      tone(Buzzer_Pin, Tones[5]);
-      delay(300);
-      noTone(Buzzer_Pin);
-      delay(300);
-    }    
+    tone(Buzzer_Pin, Tones[5]);
+    delay(300);
+    noTone(Buzzer_Pin);
+    delay(300);
 }
 
 #endif
