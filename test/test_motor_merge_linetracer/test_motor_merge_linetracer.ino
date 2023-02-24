@@ -1,6 +1,6 @@
 #include <SoftwareSerial.h>
 #include <AFMotor.h>
-#define speed_fro 160
+#define speed_fro 150
 #define speed_cur 140
 //#define end;
 
