@@ -1,6 +1,7 @@
 #ifndef __CUSTOMARDUINO_H__
 #define __CUSTOMARDUINO_H__
 
+
 volatile uint8_t *portToDDR(uint8_t port);
 volatile uint8_t *portToPORT(uint8_t port);
 volatile uint8_t *portToPIN(uint8_t port);
@@ -10,7 +11,7 @@ void pinMode_custom(uint8_t pin, uint8_t mode);
 void digitalWrite_custom(uint8_t pin, uint8_t mode);
 int digitalRead_custom(uint8_t pin);
 
-void analogWrite_custom(uint8_t pin, uint8_t mode); // 9번, 10번에 핀에 대한 출력만 
+void analogWrite_custom(uint8_t pin, uint8_t mode); // 아날로그 출력이 가능한 핀만 가능함 
 int analogRead_custom(uint8_t pin);
 
 volatile uint8_t *portToDDR(uint8_t port) {
