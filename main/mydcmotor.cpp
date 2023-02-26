@@ -3,8 +3,8 @@
 
 MyDCMotor::MyDCMotor(uint8_t in1_pin, uint8_t in2_pin, uint8_t en_pin) {
     // 모터 제어 핀을 출력으로 설정
-    pinMode_custom(in1_pin, INPUT);
-    pinMode_custom(in2_pin, INPUT);
+    pinMode_custom(in1_pin, OUTPUT);
+    pinMode_custom(in2_pin, OUTPUT);
     pinMode_custom(en_pin, OUTPUT);
 
     // 멤버 변수 초기화
@@ -15,6 +15,7 @@ MyDCMotor::MyDCMotor(uint8_t in1_pin, uint8_t in2_pin, uint8_t en_pin) {
 
 void MyDCMotor::run_forward() {
     // 모터 방향을 전진으로 설정
+    //Serial.println("forward");
     digitalWrite_custom(in1_pin_, HIGH);
     digitalWrite_custom(in2_pin_, LOW);
 
@@ -24,6 +25,7 @@ void MyDCMotor::run_forward() {
 
 void MyDCMotor::run_backward() {
     // 모터 방향을 후진으로 설정
+    //Serial.println("back");
     digitalWrite_custom(in1_pin_, LOW);
     digitalWrite_custom(in2_pin_, HIGH);
 
@@ -32,12 +34,13 @@ void MyDCMotor::run_backward() {
 }
 
 void MyDCMotor::stop() {
-    digitalWrite_custom(in1_pin_, LOW);
-    digitalWrite_custom(in2_pin_, LOW);
+  //Serial.println("stop");
+  digitalWrite_custom(in1_pin_, LOW);
+  digitalWrite_custom(in2_pin_, LOW);
 
-    now_speed_ = 0;
-    // PWM 신호를 출력하여 모터 속도 조절
-    analogWrite_custom(en_pin_, now_speed_);
+  now_speed_ = 0;
+  // PWM 신호를 출력하여 모터 속도 조절
+  analogWrite_custom(en_pin_, now_speed_);
 }
 
 void MyDCMotor::setSpeed(uint8_t speed){
