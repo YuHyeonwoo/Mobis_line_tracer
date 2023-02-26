@@ -13,6 +13,8 @@ int digitalRead_custom(uint8_t pin);
 
 void analogWrite_custom(uint8_t pin, uint8_t mode); // 아날로그 출력이 가능한 핀만 가능함 
 int analogRead_custom(uint8_t pin);
+void tone_custom(uint8_t pin, uint16_t frequency);
+
 
 volatile uint8_t *portToDDR(uint8_t port) {
   switch (port) {
@@ -161,6 +163,68 @@ void analogWrite_custom(uint8_t pin, int value) {
     case 8:
       TCCR2A |= (1 << 5);
       OCR2B = value;
+      break;
+  }
+}
+
+void tone_custom(uint8_t pin, uint16_t frequency)
+{
+  // 타이머 1 초기화
+  TCCR1A = 0;
+  TCCR1B = 0;
+  TCNT1 = 0;
+  OCR1A = 0;
+
+  // 타이머 1 비교 일치 모드 설정
+  TCCR1A |= (1 << COM1A0);
+  TCCR1B |= (1 << WGM12);
+  TCCR1B |= (1 << CS10);
+
+  // 타이머 1 주파수 계산
+  uint32_t cycles = F_CPU / frequency / 2 - 1;
+  OCR1A = cycles - 1;
+
+  // 핀 설정
+  pinMode_custom(pin, OUTPUT);
+  digitalWrite_custom(pin, HIGH);
+  
+  // 핀 설정
+  digitalWrite_custom(pin, LOW);
+}
+
+
+void tone_custom3(uint8_t pin, uint16_t frequency) {
+  uint8_t prescaler = 1;
+  uint32_t cycles = F_CPU / (prescaler * frequency);
+  
+  // Configure the pin for PWM output
+  pinMode(pin, OUTPUT);
+  TCCR1A = _BV(COM1A1) | _BV(WGM11); // Clear OC1A on compare match, set to fast PWM mode
+  TCCR1B = _BV(WGM13) | _BV(WGM12) | _BV(CS11) | _BV(CS10); // Set prescaler to 64
+  
+  // Set the PWM frequency and duty cycle
+  OCR1AH = cycles >> 8; // Set high byte of OCR1A
+  OCR1AL = cycles & 0xFF; // Set low byte of OCR1A
+  digitalWrite_custom(pin, HIGH);
+  
+  // 핀 설정
+  digitalWrite_custom(pin, LOW);
+  // Delay for the specified duration, then turn off the PWM output
+}
+
+void noTone_custom(uint8_t pin) {
+  switch(digitalPinToTimer(pin)) {
+    case TIMER1A:
+      TCCR1A &= ~_BV(COM1A1); // Clear the COM1A1 bit to disable PWM on the pin
+      break;
+    case TIMER1B:
+      TCCR1A &= ~_BV(COM1B1); // Clear the COM1B1 bit to disable PWM on the pin
+      break;
+    case TIMER2A:
+      TCCR2A &= ~_BV(COM2A1); // Clear the COM2A1 bit to disable PWM on the pin
+      break;
+    case TIMER2B:
+      TCCR2A &= ~_BV(COM2B1); // Clear the COM2B1 bit to disable PWM on the pin
       break;
   }
 }
