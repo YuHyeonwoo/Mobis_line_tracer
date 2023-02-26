@@ -1,14 +1,14 @@
-]
+
 #include <SoftwareSerial.h>
 #include <AFMotor.h>
 #include "obstacle.h"
 
+Obstacle obstacle;
 
 void setup() {
   // put your setup code here, to run once:
   Serial.begin(9600);
-  useBuzzerPin();
-  useIRSensor();
+  obstacle.pinSet(10, 9);
 }
 
 void loop() {
@@ -20,8 +20,8 @@ void loop() {
     moveSlower();
   }
 
-  if(checkOpstacle()){
-    stopSound();
+  if(obstacle.checkObstacle()){
+    obstacle.stopSound();
     MoveStop();
     return;
   }
