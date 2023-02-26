@@ -33,6 +33,8 @@ void MyDCMotor::run_backward() {
 
 void MyDCMotor::stop() {
     analogWrite_custom(pwm_pin_, 0);
+    digitalWrite(in1_pin_, LOW);
+    digitalWrite(in2_pin_, LOW);
 }
 
 void MyDCMotor::setSpeed(uint8_t speed){
