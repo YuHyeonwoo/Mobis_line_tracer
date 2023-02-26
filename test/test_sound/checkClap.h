@@ -13,7 +13,7 @@ clap2_end : 박수 두번끝
 class Clap{
     int LM_Pin;
     int now_state;
-    int first_clap_time;
+    long first_clap_time;
 public:
     void setPin(int LM_Pin);
     void checkClap(); // 현재 박수소리가 들리는 것에 따라 now_state 변화
