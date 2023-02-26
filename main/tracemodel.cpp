@@ -1,3 +1,5 @@
+#include "tracemodel.h"
+
 TraceModel :: TraceModel(int motor1_pwm, int motor1_in1, int motor1_in2, int motor2_pwm, int motor2_in1, int motor2_in2, int sp_f, int sp_c){
   pm1 = new MyDCMotor(motor1_in1, motor1_in2, motor1_pwm);
   pm2 = new MyDCMotor(motor2_in1, motor2_in2, motor2_pwm);
