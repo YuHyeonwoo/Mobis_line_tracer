@@ -11,14 +11,14 @@ TraceModel :: TraceModel(int motor1_pwm, int motor1_in1, int motor1_in2, int mot
   pm2->run(RELEASE);
 
   // lineTracer
-  pinMode(line_r, INPUT);
-  pinMode(line_l, INPUT); 
+  pinMode_custom(line_r, INPUT);
+  pinMode_custom(line_l, INPUT); 
 }
 
 void TraceModel :: Go(){
   // put your main code here, to run repeatedly:
-  int val_L = digitalRead(line_l);  // 센서 값을 읽어와서
-  int val_R = digitalRead(line_r);  // 센서 값을 읽어와서
+  int val_L = digitalRead_custom(line_l);  // 센서 값을 읽어와서
+  int val_R = digitalRead_custom(line_r);  // 센서 값을 읽어와서
 
   if (val_R == LOW && val_L == LOW){ // 둘다 검은색X
     if(isChange(0,speed_fro)){

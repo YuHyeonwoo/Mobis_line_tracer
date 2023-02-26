@@ -1,7 +1,7 @@
 #ifndef _TRACEMODEL_H_
 #define _TRACEMODEL_H_
 #include "mydcmotor.h"
-
+#include "customarduino.h"
 class TraceModel{
 private:
   int speed_fro;
