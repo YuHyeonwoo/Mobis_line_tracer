@@ -1,7 +1,7 @@
 #include "customarduino.h"
 #include "mydcmotor.h"
 
-MyDCMotor::MyDCMotor(uint8_t in1_pin, uint8_t in2_pin, uint8_t pwm_pin) {
+MyDCMotor::MyDCMotor(uint8_t in1_pin, uint8_t in2_pin, uint8_t en_pin) {
     // 모터 제어 핀을 출력으로 설정
     pinMode_custom(in1_pin, OUTPUT);
     pinMode_custom(in2_pin, OUTPUT);
@@ -10,7 +10,7 @@ MyDCMotor::MyDCMotor(uint8_t in1_pin, uint8_t in2_pin, uint8_t pwm_pin) {
     // 멤버 변수 초기화
     in1_pin_ = in1_pin;
     in2_pin_ = in2_pin;
-    pwm_pin_ = pwm_pin;
+    en_pin_ = en_pin;
 }
 
 void MyDCMotor::run_forward() {
@@ -19,7 +19,7 @@ void MyDCMotor::run_forward() {
     digitalWrite_custom(in2_pin_, LOW);
 
     // PWM 신호를 출력하여 모터 속도 조절
-    analogWrite_custom(pwm_pin_, now_speed_);
+    analogWrite_custom(in1_pin_, now_speed_);
 }
 
 void MyDCMotor::run_backward() {
@@ -28,17 +28,16 @@ void MyDCMotor::run_backward() {
     digitalWrite_custom(in2_pin_, HIGH);
 
     // PWM 신호를 출력하여 모터 속도 조절
-    analogWrite_custom(pwm_pin_, now_speed_);
+    analogWrite_custom(in1_pin_, now_speed_);
 }
 
 void MyDCMotor::stop() {
-    analogWrite_custom(pwm_pin_, 0);
-    digitalWrite(in1_pin_, LOW);
-    digitalWrite(in2_pin_, LOW);
+    digitalWrite_custom(in1_pin_, LOW);
+    digitalWrite_custom(in2_pin_, LOW);
 }
 
 void MyDCMotor::setSpeed(uint8_t speed){
-    now_speed_ = speed;
+    now_speed_ = map(abs(speed), 0, 255, 0, 255);
 }
 
 void MyDCMotor::run(uint8_t type){
