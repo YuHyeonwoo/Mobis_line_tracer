@@ -12,7 +12,7 @@ void pinMode_custom(uint8_t pin, uint8_t mode);
 void digitalWrite_custom(uint8_t pin, uint8_t mode);
 int digitalRead_custom(uint8_t pin);
 
-void analogWrite_custom(uint8_t pin, uint8_t mode); // 아날로그 출력이 가능한 핀만 가능함 
+void analogWrite_custom(uint8_t pin, uint8_t value); // 아날로그 출력이 가능한 핀만 가능함 
 int analogRead_custom(uint8_t pin);
 void tone_custom(uint8_t pin, uint16_t frequency, uint16_t duration);
 

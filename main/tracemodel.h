@@ -20,6 +20,8 @@ private:
 public:
   TraceModel(int motor1_en, int motor1_in1, int motor1_in2, int motor2_en, int motor2_in1, int motor2_in2, int sp_f, int sp_c);
   void Go();
+  void Fast();
+  void Slow();
 };
 
 #endif
