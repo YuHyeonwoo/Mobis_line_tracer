@@ -15,6 +15,8 @@ public:
     // motor control functions
     void setSpeed(uint8_t speed);
     void run(uint8_t type);
+    void slow(uint8_t plus);
+    void fast(uint8_t plus);
 
 private:
     uint8_t in1_pin_;   // 모터 방향 핀 1

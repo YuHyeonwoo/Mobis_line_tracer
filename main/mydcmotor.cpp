@@ -28,7 +28,7 @@ void MyDCMotor::run_backward() {
     digitalWrite_custom(in2_pin_, HIGH);
 
     // PWM 신호를 출력하여 모터 속도 조절
-    analogWrite_custom(in1_pin_, now_speed_);
+    analogWrite_custom(in2_pin_, now_speed_);
 }
 
 void MyDCMotor::stop() {
@@ -54,4 +54,12 @@ void MyDCMotor::run(uint8_t type){
         default:
             break;
     }
+}
+void MyDCMotor::slow(uint8_t plus){
+  now_speed_ -= plus;
+  if(now_speed_ < 0) now_speed_ = 0;
+}
+void MyDCMotor::fast(uint8_t plus){
+  now_speed_ += plus;
+  if(now_speed_ > 250) now_speed_ = 250;
 }
