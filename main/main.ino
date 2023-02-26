@@ -1,6 +1,5 @@
 #include "obstacle.h"
-
-Obstacle obstacle;
+#include "tracemodel.h"
 
 void setup() {
   // put your setup code here, to run once:
