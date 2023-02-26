@@ -111,7 +111,7 @@ int analogRead_custom(uint8_t pin) {
 
 
 
-void analogWrite_custom(uint8_t pin, int value) {
+void analogWrite_custom(uint8_t pin, uint8_t value) {
   // 핀 번호를 Timer/Counter 번호로 변환
   uint8_t timer;
   switch(pin) {
