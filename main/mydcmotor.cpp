@@ -13,7 +13,7 @@ MyDCMotor::MyDCMotor(uint8_t in1_pin, uint8_t in2_pin, uint8_t pwm_pin) {
     pwm_pin_ = pwm_pin;
 }
 
-void MyDCMotor::run() {
+void MyDCMotor::run_forward() {
     // 모터 방향을 전진으로 설정
     digitalWrite_custom(in1_pin_, HIGH);
     digitalWrite_custom(in2_pin_, LOW);
@@ -37,4 +37,20 @@ void MyDCMotor::stop() {
 
 void MyDCMotor::setSpeed(uint8_t speed){
     now_speed_ = speed;
+}
+
+void MyDCMotor::run(uint8_t type){
+    switch(type){
+        case RELEASE:
+            this->stop();
+            break;
+        case FORWARD:
+            this->run_forward();
+            break;
+        case BACKWARD:
+            this->run_backward();
+            break;
+        default:
+            break;
+    }
 }
