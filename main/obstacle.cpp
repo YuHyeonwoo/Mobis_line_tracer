@@ -12,8 +12,6 @@ int Obstacle::checkObstacle(){
 }
 
 void Obstacle::stopSound(){
-    tone(Buzzer_Pin, Tones[5]);
-    delay(300);
-    noTone(Buzzer_Pin);
-    delay(300);
+    tone_custom(Buzzer_Pin, Tones[5], 300);
+    delay(600);
 }

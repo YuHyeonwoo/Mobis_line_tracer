@@ -32,7 +32,7 @@ void Clap::setPin(int LM_Pin){
 
 
 int Clap::isLoud(int sound){
-  if(sound > 70) return 1;
+  if(sound < 400) return 1;
   //if(sound == 1)return 1;
   return 0;
 }
