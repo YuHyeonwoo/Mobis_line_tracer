@@ -5,7 +5,7 @@ MyDCMotor::MyDCMotor(uint8_t in1_pin, uint8_t in2_pin, uint8_t en_pin) {
     // 모터 제어 핀을 출력으로 설정
     pinMode_custom(in1_pin, OUTPUT);
     pinMode_custom(in2_pin, OUTPUT);
-    pinMode_custom(pwm_pin, OUTPUT);
+    pinMode_custom(en_pin, OUTPUT);
 
     // 멤버 변수 초기화
     in1_pin_ = in1_pin;

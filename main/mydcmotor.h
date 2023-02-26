@@ -10,7 +10,7 @@
 class MyDCMotor {
 public:
     // constructor
-    MyDCMotor(uint8_t in1_pin, uint8_t in2_pin, uint8_t pwm_pin);
+    MyDCMotor(uint8_t in1_pin, uint8_t in2_pin, uint8_t en_pin);
 
     // motor control functions
     void setSpeed(uint8_t speed);
