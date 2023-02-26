@@ -1,10 +1,6 @@
 #include "Arduino.h"
 #include "mydcmotor.h"
 
-MyDCMotor::MyDCMotor(uint8_t pwm_pin){
-    pinMode(pwm_pin,OUTPUT);
-}
-
 MyDCMotor::MyDCMotor(uint8_t in1_pin, uint8_t in2_pin, uint8_t pwm_pin) {
     // 모터 제어 핀을 출력으로 설정
     pinMode(in1_pin, OUTPUT);
@@ -41,12 +37,4 @@ void MyDCMotor::stop() {
 
 void MyDCMotor::setSpeed(uint8_t speed){
     now_speed_ = speed;
-}
-
-void MyDCMotor::servo(uint8_t i){
-    digitalWrite(9, HIGH);  
-    delay(i);     
-    digitalWrite(9, LOW); 
-    delay(180-i);    
-    // analogWrite(pwm_pin_, now_speed_);
 }
