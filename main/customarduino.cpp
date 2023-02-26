@@ -1,5 +1,6 @@
 #include "customarduino.h"
 
+
 volatile uint8_t *portToDDR(uint8_t port) {
   switch (port) {
     case 0:
@@ -151,80 +152,38 @@ void analogWrite_custom(uint8_t pin, int value) {
   }
 }
 
-// void tone_custom(uint8_t pin, uint16_t frequency)
-// {
-//   // 타이머 1 초기화
-//   TCCR1A = 0;
-//   TCCR1B = 0;
-//   TCNT1 = 0;
-//   OCR1A = 0;
 
-//   // 타이머 1 비교 일치 모드 설정
-//   TCCR1A |= (1 << COM1A0);
-//   TCCR1B |= (1 << WGM12);
-//   TCCR1B |= (1 << CS10);
-
-//   // 타이머 1 주파수 계산
-//   uint32_t cycles = F_CPU / frequency / 2 - 1;
-//   OCR1A = cycles - 1;
-
-//   // 핀 설정
-//   pinMode_custom(pin, OUTPUT);
-//   digitalWrite_custom(pin, HIGH);
+void tone_custom(uint8_t pin, unsigned int frequency, unsigned long duration) {
+// 타이머2 레지스터의 초기화
+  TCCR2A = 0;
+  TCCR2B = 0;
+  TCNT2 = 0;
   
-//   // 핀 설정
-//   digitalWrite_custom(pin, LOW);
-// }
-
-void tone_custom(uint8_t pin, uint16_t frequency, uint16_t duration) {
-  long toggleCount = 0;
-  long half_period = 0;
-
-  if (frequency > 0 && duration > 0) {
-    half_period = 1000000 / frequency / 2;
-    toggleCount = frequency * duration / 1000;
+  // 타이머2 레지스터의 설정
+  TCCR2A |= (1 << WGM21) | (1 << COM2B0);
+  TCCR2B |= (1 << CS21);
+  
+  // 타이머2 레지스터의 출력 비율 계산
+  int prescaler = 64;
+  int ocrValue = F_CPU / (prescaler * frequency) - 1;
+  OCR2A = ocrValue;
+  
+  // tone 출력을 위한 디지털 핀 설정
+  pinMode_custom(pin, OUTPUT);
+  digitalWrite_custom(pin, 0);
+  
+  // tone 출력 시작
+  long elapsed_time = 0;
+  while (elapsed_time < duration*1000) {
+    digitalWrite_custom(pin, 1);
+    delayMicroseconds(ocrValue);
+    digitalWrite_custom(pin, 0);
+    delayMicroseconds(ocrValue);
+    elapsed_time += (ocrValue * 2);
   }
-
-  for (int i = 0; i < toggleCount; i++) {
-    digitalWrite(pin, HIGH);
-    delayMicroseconds(half_period);
-    digitalWrite(pin, LOW);
-    delayMicroseconds(half_period);
-  }
-}
-
-void tone_custom3(uint8_t pin, uint16_t frequency) {
-  uint8_t prescaler = 1;
-  uint32_t cycles = F_CPU / (prescaler * frequency);
   
-  // Configure the pin for PWM output
-  pinMode(pin, OUTPUT);
-  TCCR1A = _BV(COM1A1) | _BV(WGM11); // Clear OC1A on compare match, set to fast PWM mode
-  TCCR1B = _BV(WGM13) | _BV(WGM12) | _BV(CS11) | _BV(CS10); // Set prescaler to 64
-  
-  // Set the PWM frequency and duty cycle
-  OCR1AH = cycles >> 8; // Set high byte of OCR1A
-  OCR1AL = cycles & 0xFF; // Set low byte of OCR1A
-  digitalWrite_custom(pin, HIGH);
-  
-  // 핀 설정
-  digitalWrite_custom(pin, LOW);
-  // Delay for the specified duration, then turn off the PWM output
-}
-
-void noTone_custom(uint8_t pin) {
-  switch(digitalPinToTimer(pin)) {
-    case TIMER1A:
-      TCCR1A &= ~_BV(COM1A1); // Clear the COM1A1 bit to disable PWM on the pin
-      break;
-    case TIMER1B:
-      TCCR1A &= ~_BV(COM1B1); // Clear the COM1B1 bit to disable PWM on the pin
-      break;
-    case TIMER2A:
-      TCCR2A &= ~_BV(COM2A1); // Clear the COM2A1 bit to disable PWM on the pin
-      break;
-    case TIMER2B:
-      TCCR2A &= ~_BV(COM2B1); // Clear the COM2B1 bit to disable PWM on the pin
-      break;
-  }
+  // tone 출력 종료 및 초기화
+  digitalWrite_custom(pin, 0);
+  TCCR2A = 0;
+  TCCR2B = 0;
 }
