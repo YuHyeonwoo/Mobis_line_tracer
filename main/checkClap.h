@@ -32,14 +32,14 @@ void Clap::setPin(int LM_Pin){
 
 
 int Clap::isLoud(int sound){
-  //if(sound > 70) return 1;
-  if(sound == 1)return 1;
+  if(sound > 70) return 1;
+  //if(sound == 1)return 1;
   return 0;
 }
 
 void Clap::checkClap(){
-    //int sound = analogRead_custom(LM_Pin);
-    int sound = digitalRead_custom(LM_Pin);
+    int sound = analogRead_custom(LM_Pin);
+    //int sound = digitalRead_custom(LM_Pin);
     if(isLoud(sound) && now_state == nothing){ // nothing에서 박수 소리를 들으면
         first_clap_time = millis();    
         now_state = clap1;
