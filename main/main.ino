@@ -27,13 +27,13 @@ void loop() {
   int clapNum = clap.getClap();
   switch(clapNum){
     case 1:
-      //traceModel.slow();
+      traceModel->Slow();
       break;
     case 2:
-      //traceModel.fast();
+      traceModel->Fast();
       break;
     default:
      break;
   }
-  //traceModel.go();
+  traceModel->Go();
 }

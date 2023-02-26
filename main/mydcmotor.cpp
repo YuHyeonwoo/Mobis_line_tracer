@@ -62,8 +62,12 @@ void MyDCMotor::run(uint8_t type){
 void MyDCMotor::slow(uint8_t plus){
   now_speed_ -= plus;
   if(now_speed_ < 130) now_speed_ = 130;
+
+  analogWrite_custom(en_pin_, now_speed_);
 }
 void MyDCMotor::fast(uint8_t plus){
   now_speed_ += plus;
   if(now_speed_ > 220) now_speed_ = 220;
+
+  analogWrite_custom(en_pin_, now_speed_);
 }

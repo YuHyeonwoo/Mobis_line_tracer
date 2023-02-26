@@ -121,3 +121,13 @@ void TraceModel :: Speed(int type, int speed){
   }
   //delay(100);
 }
+
+void TraceModel :: Slow(){
+  pm1->slow(30);
+  pm2->slow(30);
+}
+
+void TraceModel :: Fast(){
+  pm1->fast(30);
+  pm2->fast(30);
+}
