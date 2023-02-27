@@ -3,8 +3,8 @@
 #include "./header/tracemodel_library.h"
 #include "./header/checkClap.h"
 
-#define sp_f 210
-#define sp_c 210
+#define sp_f 180
+#define sp_c 160
 #define motor1_pin 4
 #define motor2_pin 3
 
@@ -23,14 +23,13 @@ void setup() {
 }
 void loop() {
 
-  if(obstacle.checkObstacle()){
-    traceModel->Stop();
-    obstacle.stopSound();
-    delay(600);
-    return;
-  }
-  int clapNum = clap.getClap();
+  // if(obstacle.checkObstacle()){
+  //   traceModel->Stop();
+  //   obstacle.stopSound();
+  //   delay(600);
+  //   return;
+  // }
+  // int clapNum = clap.getClap();
 
   traceModel->Go();
-  delay(20);
 }
