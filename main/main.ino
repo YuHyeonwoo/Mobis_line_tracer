@@ -3,8 +3,8 @@
 #include "./header/tracemodel_library.h"
 #include "./header/checkClap.h"
 
-#define sp_f 180
-#define sp_c 160
+#define sp_f 140
+#define sp_c 140
 #define motor1_pin 4
 #define motor2_pin 3
 
@@ -33,12 +33,12 @@ void loop() {
 
   switch(clapNum){
     case 1:
-      traceModel->Slow();
-      tone_custom(10, 400, 300);
+      if (traceModel->Slow())
+        tone_custom(10, 400, 300);
       break;
     case 2:
-      traceModel->Fast();
-      tone_custom(10, 600, 300);
+      if (traceModel->Fast())
+        tone_custom(10, 600, 300);
       break;
   }
 

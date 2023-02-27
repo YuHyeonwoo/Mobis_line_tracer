@@ -19,7 +19,7 @@ void Clap::checkClap(){
         first_clap_time = millis();    
         now_state = clap1;
     }
-    else if(now_state == clap1 && (millis()-first_clap_time) >= 150){ // clap1에서 0.15초가 지나면
+    else if(now_state == clap1 && (millis()-first_clap_time) >= 200){ // clap1에서 0.15초가 지나면
         now_state = clap1_waiting;
     }
     else if(now_state == clap1_waiting && (millis()-first_clap_time) >= 600){ // clap_waiting인 상태에서 0.6초가 되면

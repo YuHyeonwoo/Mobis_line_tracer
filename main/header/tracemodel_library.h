@@ -3,6 +3,8 @@
 #include <AFMotor.h>
 #include "customarduino.h"
 
+#define DELTA 80
+
 class TraceModel{
 private:
   int speed_fro;
@@ -21,8 +23,8 @@ private:
 public:
   TraceModel(int sp_f, int sp_c, int motor1_pin, int motor2_pin);
   void Go();
-  void Slow();
-  void Fast();
+  int Slow();
+  int Fast();
   void Stop();
 };
 

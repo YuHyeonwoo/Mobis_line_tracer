@@ -156,9 +156,9 @@ void analogWrite_custom(uint8_t pin, uint8_t value) {
 void tone_custom(uint8_t pin, unsigned int frequency, unsigned long duration) {
 // 타이머2 레지스터의 초기화
 
+
   TCCR2A = 0;
   TCCR2B = 0;
-  TCNT2 = 0;
   
   // 타이머2 레지스터의 설정
   TCCR2A |= (1 << WGM21) | (1 << COM2B0);
@@ -185,4 +185,5 @@ void tone_custom(uint8_t pin, unsigned int frequency, unsigned long duration) {
   
   // tone 출력 종료
   digitalWrite_custom(pin, 0);
+
 }
