@@ -1,4 +1,5 @@
 #include "tracemodel_library.h"
+
 TraceModel :: TraceModel(int sp_f, int sp_c, int motor1_pin, int motor2_pin){
   pm1 = new AF_DCMotor(motor1_pin);
   pm2 = new AF_DCMotor(motor2_pin);
