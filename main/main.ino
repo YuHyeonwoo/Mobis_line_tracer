@@ -24,8 +24,8 @@ void setup() {
 void loop() {
 
   if(obstacle.checkObstacle()){
-    obstacle.stopSound();
     traceModel->Stop();
+    obstacle.stopSound();
     delay(600);
     return;
   }
