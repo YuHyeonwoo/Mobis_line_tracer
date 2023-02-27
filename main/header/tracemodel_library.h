@@ -1,6 +1,5 @@
 #ifndef _TRACEMODEL_H_
 #define _TRACEMODEL_H_
-#include <SoftwareSerial.h>
 #include <AFMotor.h>
 #include "customarduino.h"
 

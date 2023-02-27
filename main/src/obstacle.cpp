@@ -1,4 +1,4 @@
-#include "obstacle.h"
+#include "../header/obstacle.h"
 
 void Obstacle::pinSet(int Buzzer_Pin, int IR_Sensor_Pin){
   this->Buzzer_Pin = Buzzer_Pin;
@@ -8,7 +8,7 @@ void Obstacle::pinSet(int Buzzer_Pin, int IR_Sensor_Pin){
 }
 
 int Obstacle::checkObstacle(){
-  return !digitalRead_custom(this->IR_Sensor_Pin);
+  return !digitalRead(this->IR_Sensor_Pin);
 }
 
 void Obstacle::stopSound(){

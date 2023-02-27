@@ -1,12 +1,12 @@
-#include "obstacle.h"
-#include "customarduino.h"
-#include "tracemodel_library.h"
-#include "checkClap.h"
+#include "./header/obstacle.h"
+#include "./header/customarduino.h"
+#include "./header/tracemodel_library.h"
+#include "./header/checkClap.h"
 
-#define sp_f 220
-#define sp_c 220
-#define motor1_pin 1
-#define motor2_pin 2
+#define sp_f 210
+#define sp_c 210
+#define motor1_pin 4
+#define motor2_pin 3
 
 
 Obstacle obstacle;
@@ -32,5 +32,5 @@ void loop() {
   int clapNum = clap.getClap();
 
   traceModel->Go();
-  //delay(20);
+  delay(20);
 }

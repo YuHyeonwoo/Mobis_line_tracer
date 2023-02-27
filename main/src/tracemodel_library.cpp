@@ -1,4 +1,4 @@
-#include "tracemodel_library.h"
+#include "../header/tracemodel_library.h"
 
 TraceModel :: TraceModel(int sp_f, int sp_c, int motor1_pin, int motor2_pin){
   pm1 = new AF_DCMotor(motor1_pin);
@@ -30,8 +30,6 @@ void TraceModel :: Go(){
       Speed(1,speed_fro);
     }
     Move('f');
-    Serial.println("front");
-    //delay(500);
   }
   
   else if (val_R == LOW){     // 왼쪽이 검은색
@@ -42,8 +40,6 @@ void TraceModel :: Go(){
       Speed(1,speed_fro);
     }
     Move('l');   
-    Serial.println("left");     
-   //delay(500);
   }
   else if (val_L == LOW){ // 오른쪽이 검은색
     if(isChange(0,speed_fro)){
@@ -53,8 +49,6 @@ void TraceModel :: Go(){
       Speed(1,speed_cur);
     }
     Move('r');
-    Serial.println("right");
-    //delay(500);
   } 
   else{               // 둘다 검은색
     if(isChange(0,speed_fro)){
@@ -66,8 +60,6 @@ void TraceModel :: Go(){
     Move('b');
     delay(500);
     Move('s');
-    Serial.println("stop");
-    //delay(700);
   }
 }
 
@@ -83,31 +75,26 @@ void TraceModel :: Move(char cmd){
     case 'f': // front
       pm1->run(FORWARD);
       pm2->run(FORWARD);
-      Serial.println("front");
       break;
     
     case 'b': // back
       pm1->run(BACKWARD);
       pm2->run(BACKWARD);
-      Serial.println("back");
       break;
 
     case 'r': // right
       pm1->run(FORWARD);
       pm2->run(BACKWARD);
-      Serial.println("right");
       break;
     
     case 'l': // left
       pm1->run(BACKWARD);
       pm2->run(FORWARD);  
-      Serial.println("left");
       break;
     
     default:
       pm1->run(RELEASE);
       pm2->run(RELEASE);
-      Serial.println("stop");
       break;
   }
 }
