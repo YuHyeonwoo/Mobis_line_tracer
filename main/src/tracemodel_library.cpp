@@ -119,14 +119,14 @@ void TraceModel :: Stop(){
 
 void TraceModel :: Slow(){
   if(speed_fro > 100 && speed_cur > 100){
-    speed_fro -= 20;
-    speed_cur -= 20;
+    speed_fro -= 50;
+    speed_cur -= 50;
   }
 }
 
 void TraceModel :: Fast(){
-  if(speed_fro < 225 && speed_cur < 225){
-    speed_fro += 20;
-    speed_cur += 20;
+  if(speed_fro < 205 && speed_cur < 205){
+    speed_fro += 50;
+    speed_cur += 50;
   }
 }

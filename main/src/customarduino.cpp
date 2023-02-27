@@ -155,10 +155,7 @@ void analogWrite_custom(uint8_t pin, uint8_t value) {
 
 void tone_custom(uint8_t pin, unsigned int frequency, unsigned long duration) {
 // 타이머2 레지스터의 초기화
-  uint8_t before_TCCR2A = TCCR2A;
-  uint8_t before_TCCR2B = TCCR2B;
-  uint8_t before_TCNT2 = TCNT2;
-  uint8_t before_OCR2A = OCR2A;
+
   TCCR2A = 0;
   TCCR2B = 0;
   TCNT2 = 0;
@@ -186,10 +183,6 @@ void tone_custom(uint8_t pin, unsigned int frequency, unsigned long duration) {
     elapsed_time += (ocrValue * 2);
   }
   
-  // tone 출력 종료 및 초기화
+  // tone 출력 종료
   digitalWrite_custom(pin, 0);
-  TCCR2A = before_TCCR2A;
-  TCCR2B = before_TCCR2B;
-  TCNT2 = before_TCNT2;
-  OCR2A = before_OCR2A;
 }
