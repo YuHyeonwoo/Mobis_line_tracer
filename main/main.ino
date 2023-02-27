@@ -23,13 +23,24 @@ void setup() {
 }
 void loop() {
 
-  // if(obstacle.checkObstacle()){
-  //   traceModel->Stop();
-  //   obstacle.stopSound();
-  //   delay(600);
-  //   return;
-  // }
-  // int clapNum = clap.getClap();
+  if(obstacle.checkObstacle()){
+    traceModel->Stop();
+    obstacle.stopSound();
+    delay(600);
+    return;
+  }
+  int clapNum = clap.getClap();
+
+  switch(clapNum){
+    case 1:
+      traceModel->Slow();
+      tone_custom(10, 400, 300);
+      break;
+    case 2:
+      traceModel->Fast();
+      tone_custom(10, 600, 300);
+      break;
+  }
 
   traceModel->Go();
 }
