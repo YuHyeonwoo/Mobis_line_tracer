@@ -120,3 +120,17 @@ void TraceModel :: Speed(int type, int speed){
   }
   //delay(100);
 }
+
+void TraceModel :: Slow(){
+  if(speed_fro > 30 && speed_cur > 30){
+    speed_fro -= 30;
+    speed_cur -= 30;
+  }
+}
+
+void TraceModel :: Fast(){
+  if(speed_fro < 255 && speed_cur < 255){
+    speed_fro += 30;
+    speed_cur += 30;
+  }
+}

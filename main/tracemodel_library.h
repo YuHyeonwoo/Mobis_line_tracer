@@ -2,13 +2,14 @@
 #define _TRACEMODEL_H_
 #include <SoftwareSerial.h>
 #include <AFMotor.h>
+#include "customarduino.h"
 
 class TraceModel{
 private:
   int speed_fro;
   int speed_cur;
-  int line_r = A0;
-  int line_l = A5;
+  int line_r = 14;
+  int line_l = 19;
   AF_DCMotor* pm1;
   AF_DCMotor* pm2;
 
@@ -21,6 +22,8 @@ private:
 public:
   TraceModel(int sp_f, int sp_c, int motor1_pin, int motor2_pin);
   void Go();
+  void Slow();
+  void Fast();
 };
 
 #endif

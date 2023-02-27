@@ -1,6 +1,6 @@
 #include "obstacle.h"
 #include "customarduino.h"
-#include "tracemodel.h"
+#include "tracemodel_library.h"
 #include "checkClap.h"
 
 #define sp_f 220
@@ -44,7 +44,7 @@ void loop() {
     case 2:
       traceModel->Fast();
       break;
-    default:S
+    default:
      break;
   }
   traceModel->Go();
