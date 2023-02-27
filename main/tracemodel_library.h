@@ -19,13 +19,12 @@ private:
   int isChange(int type, int speed);
   void Move(char cmd);
   void Speed(int type, int speed);
-  void fast();
-  void slow();
 public:
   TraceModel(int sp_f, int sp_c, int motor1_pin, int motor2_pin);
   void Go();
   void Slow();
   void Fast();
+  void Stop();
 };
 
 #endif

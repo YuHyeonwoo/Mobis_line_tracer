@@ -13,5 +13,5 @@ int Obstacle::checkObstacle(){
 
 void Obstacle::stopSound(){
     tone_custom(Buzzer_Pin, Tones[5], 300);
-    delay(600);
+    Serial.println("tone");
 }

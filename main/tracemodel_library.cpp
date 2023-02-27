@@ -30,6 +30,7 @@ void TraceModel :: Go(){
       Speed(1,speed_fro);
     }
     Move('f');
+    Serial.println("front");
     //delay(500);
   }
   
@@ -40,7 +41,8 @@ void TraceModel :: Go(){
     if(isChange(1,speed_fro)){
       Speed(1,speed_fro);
     }
-    Move('l');        
+    Move('l');   
+    Serial.println("left");     
    //delay(500);
   }
   else if (val_L == LOW){ // 오른쪽이 검은색
@@ -51,6 +53,7 @@ void TraceModel :: Go(){
       Speed(1,speed_cur);
     }
     Move('r');
+    Serial.println("right");
     //delay(500);
   } 
   else{               // 둘다 검은색
@@ -63,6 +66,7 @@ void TraceModel :: Go(){
     Move('b');
     delay(500);
     Move('s');
+    Serial.println("stop");
     //delay(700);
   }
 }
@@ -120,6 +124,10 @@ void TraceModel :: Speed(int type, int speed){
     speedArr[1] = speed;
   }
   //delay(100);
+}
+
+void TraceModel :: Stop(){
+  Move('s');
 }
 
 void TraceModel :: Slow(){
