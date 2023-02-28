@@ -8,10 +8,9 @@ void Obstacle::pinSet(int Buzzer_Pin, int IR_Sensor_Pin){
 }
 
 int Obstacle::checkObstacle(){
-  return !digitalRead(this->IR_Sensor_Pin);
+  return !digitalRead_custom(this->IR_Sensor_Pin);
 }
 
 void Obstacle::stopSound(){
     tone_custom(Buzzer_Pin, Tones[5], 300);
-    Serial.println("tone");
 }
